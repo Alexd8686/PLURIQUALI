@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0D0B11">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Pluri'Quali">
+    <meta name="description" content="Contrôle qualité terrain — Responsables Clients Pluri'Elles">
+    <title>Pluri'Quali — Contrôle Qualité</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%236247AA'/%3E%3Cpath d='M14 24l6 6 14-14' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%236247AA'/%3E%3Cpath d='M14 24l6 6 14-14' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ========== LOGIN SCREEN ========== -->
+<div id="loginScreen" class="screen active">
+    <div class="login-container">
+        <div class="login-logo">
+            <div class="login-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <rect width="48" height="48" rx="12" fill="#6247AA"/>
+                    <path d="M14 24l6 6 14-14" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h1 class="login-title">Pluri'Quali</h1>
+            <p class="login-subtitle">Contrôle qualité terrain<br><span>Responsables Clients — Pluri'Elles</span></p>
+        </div>
+        <div class="login-form">
+            <div class="form-group">
+                <label for="loginName">Nom complet</label>
+                <input type="text" id="loginName" placeholder="Ex : Boucif Benrabah" autocomplete="name">
+            </div>
+            <div class="form-group">
+                <label for="loginEmail">Email professionnel</label>
+                <input type="email" id="loginEmail" placeholder="prenom.nom@agence-plurielles.fr" autocomplete="email">
+            </div>
+            <button id="loginBtn" class="btn-primary btn-full" onclick="handleLogin()">
+                Accéder aux contrôles
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+        </div>
+        <div class="login-footer">
+            <img src="https://alexd8686.github.io/enquete-plurielles/chatbot/logo-elles.webp" alt="Pluri'Elles" class="login-logo-img" onerror="this.style.display='none'">
+        </div>
+    </div>
+</div>
+
+<!-- ========== MAIN APP SCREEN ========== -->
+<div id="appScreen" class="screen">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <span class="nav-logo">Pluri'Quali</span>
+            <span class="nav-dot"></span>
+        </div>
+        <div class="nav-right">
+            <button class="nav-link" onclick="showHistory()" title="Historique">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </button>
+            <button class="nav-link" onclick="handleLogout()" title="Déconnexion">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Progress bar -->
+    <div class="progress-bar-container">
+        <div id="progressBar" class="progress-bar-fill"></div>
+    </div>
+
+    <!-- Main content -->
+    <main class="main-content">
+
+        <!-- User greeting -->
+        <div class="greeting">
+            <span id="greetingText">Bonjour</span>
+            <p class="greeting-sub">Nouveau contrôle qualité terrain</p>
+        </div>
+
+        <!-- Site identification -->
+        <section class="card" id="siteSection">
+            <div class="card-header" onclick="toggleSection('siteSection')">
+                <div class="card-header-left">
+                    <span class="section-icon" style="background:#6247AA">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </span>
+                    <h2>Identification du site</h2>
+                </div>
+                <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="card-body open">
+                <div class="form-group">
+                    <label>Client / Site</label>
+                    <input type="text" id="siteClient" placeholder="Ex : Gecina — Tour Pacific">
+                </div>
+                <div class="form-group">
+                    <label>Date du contrôle</label>
+                    <input type="date" id="siteDate">
+                </div>
+                <div class="form-group">
+                    <label>Type de contrôle</label>
+                    <select id="siteType">
+                        <option value="">— Choisir —</option>
+                        <option>Visite hebdomadaire</option>
+                        <option>Contrôle contradictoire</option>
+                        <option>Contrôle mystère</option>
+                        <option>Audit qualité annuel</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Métier</label>
+                    <select id="siteMetier">
+                        <option value="">— Choisir —</option>
+                        <option>Accueil / Hôte(sse)</option>
+                        <option>Agent Courrier</option>
+                        <option>Factotum / Agent polyvalent</option>
+                        <option>Hospitality Manager</option>
+                        <option>Agent Property Manager</option>
+                        <option>Agent Numérisation</option>
+                        <option>Agent Reprographie</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Ressource (salarié·e)</label>
+                    <input type="text" id="siteRessource" placeholder="Nom du/de la salarié·e">
+                </div>
+            </div>
+        </section>
+
+        <!-- Quality sections container -->
+        <div id="sectionsContainer"></div>
+
+        <!-- Plan d'actions -->
+        <section class="card" id="actionSection">
+            <div class="card-header" onclick="toggleSection('actionSection')">
+                <div class="card-header-left">
+                    <span class="section-icon" style="background:#6247AA">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    </span>
+                    <h2>Plan d'actions</h2>
+                </div>
+                <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="card-body">
+                <div id="actionsList"></div>
+                <button class="btn-outline btn-full" onclick="addAction()" style="margin-top:12px">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    Ajouter une action
+                </button>
+            </div>
+        </section>
+
+        <!-- Photos -->
+        <section class="card" id="photoSection">
+            <div class="card-header" onclick="toggleSection('photoSection')">
+                <div class="card-header-left">
+                    <span class="section-icon" style="background:#2980B9">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    </span>
+                    <h2>Photos</h2>
+                </div>
+                <span class="badge" id="photoBadge">0</span>
+                <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="card-body">
+                <div id="photoGrid" class="photo-grid"></div>
+                <label class="btn-outline btn-full photo-upload-btn" style="margin-top:12px">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    Prendre une photo
+                    <input type="file" accept="image/*" capture="environment" multiple onchange="handlePhotos(this)" hidden>
+                </label>
+            </div>
+        </section>
+
+        <!-- Commentaire global -->
+        <section class="card" id="commentSection">
+            <div class="card-header" onclick="toggleSection('commentSection')">
+                <div class="card-header-left">
+                    <span class="section-icon" style="background:#C67D20">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                    </span>
+                    <h2>Commentaire global</h2>
+                </div>
+                <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="card-body">
+                <div class="textarea-wrapper">
+                    <textarea id="globalComment" rows="4" placeholder="Remarques générales sur la prestation..."></textarea>
+                    <button class="btn-mic" onclick="startDictation('globalComment')" title="Dictée vocale">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Score summary -->
+        <div id="scoreSummary" class="score-summary hidden">
+            <div class="score-ring-container">
+                <svg class="score-ring" viewBox="0 0 120 120">
+                    <circle cx="60" cy="60" r="52" fill="none" stroke="#DDD8E8" stroke-width="8"/>
+                    <circle id="scoreCircle" cx="60" cy="60" r="52" fill="none" stroke="#6247AA" stroke-width="8" stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="327" transform="rotate(-90 60 60)"/>
+                </svg>
+                <div class="score-value">
+                    <span id="scorePercent">0</span><small>%</small>
+                </div>
+            </div>
+            <div class="score-details">
+                <div class="score-label" id="scoreLabel">En attente</div>
+                <div class="score-breakdown">
+                    <span class="sb-item sb-green"><span id="countConf">0</span> Conforme</span>
+                    <span class="sb-item sb-orange"><span id="countAmel">0</span> À améliorer</span>
+                    <span class="sb-item sb-red"><span id="countNC">0</span> Non conforme</span>
+                    <span class="sb-item sb-gray"><span id="countNA">0</span> N/A</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="action-buttons">
+            <button class="btn-primary btn-full" onclick="generateReport()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                Générer le rapport
+            </button>
+            <button class="btn-outline btn-full" onclick="resetForm()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+                Nouveau contrôle
+            </button>
+        </div>
+
+    </main>
+</div>
+
+<!-- ========== HISTORY MODAL ========== -->
+<div id="historyModal" class="modal hidden">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Historique des contrôles</h2>
+            <button class="modal-close" onclick="closeHistory()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div id="historyList" class="history-list"></div>
+            <div class="history-actions">
+                <button class="btn-outline btn-full" onclick="exportCSV()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Exporter CSV
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== REPORT MODAL ========== -->
+<div id="reportModal" class="modal hidden">
+    <div class="modal-content modal-large">
+        <div class="modal-header">
+            <h2>Rapport de contrôle</h2>
+            <button class="modal-close" onclick="closeReport()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div id="reportPreview"></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-primary" onclick="downloadReport()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Télécharger HTML
+            </button>
+            <button class="btn-outline" onclick="emailReport()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Envoyer par email
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast hidden"></div>
+
+<script src="app.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js')}</script>
+</body>
+</html>
